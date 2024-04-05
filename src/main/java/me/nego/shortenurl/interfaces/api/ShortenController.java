@@ -1,5 +1,7 @@
 package me.nego.shortenurl.interfaces.api;
 
+import me.nego.shortenurl.business.usecase.OriginalToShortenedUseCase;
+import me.nego.shortenurl.business.usecase.OriginalToShortenedUseCase.Request;
 import me.nego.shortenurl.interfaces.dto.ShortenRequest;
 import me.nego.shortenurl.interfaces.dto.ShortenResponse;
 import org.springframework.validation.annotation.Validated;
@@ -16,11 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ShortenController {
 
+    private final OriginalToShortenedUseCase originalToShortenedUseCase;
+
+    public ShortenController(OriginalToShortenedUseCase originalToShortenedUseCase) {
+        this.originalToShortenedUseCase = originalToShortenedUseCase;
+    }
+
     @PostMapping("/v1/shorten")
     public Object shorten(
             @RequestBody @Validated final ShortenRequest requestDto
     ) {
-        return new ShortenResponse("");
+        return new ShortenResponse(originalToShortenedUseCase.originalToShortened(
+                new Request(requestDto.original())
+        ));
     }
 
 
