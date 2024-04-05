@@ -1,7 +1,7 @@
 package me.nego.shortenurl.business.scenario;
 
 import java.util.Optional;
-import me.nego.shortenurl.business.domain.Address;
+import me.nego.shortenurl.business.model.Address;
 import me.nego.shortenurl.infrastructure.entity.AddressJpaEntity;
 import me.nego.shortenurl.infrastructure.service.AddressQuery;
 import org.springframework.stereotype.Service;

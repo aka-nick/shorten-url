@@ -1,4 +1,4 @@
-package me.nego.shortenurl.business.domain;
+package me.nego.shortenurl.business.model;
 
 /**
  * @author Nick
