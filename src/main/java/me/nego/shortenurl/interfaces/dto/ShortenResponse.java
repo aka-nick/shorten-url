@@ -10,8 +10,8 @@ public record ShortenResponse(
         String shortened
 ) {
 
-    public ShortenResponse(OriginalToShortenedUseCase.Response response) {
-        this(response.shortened());
+    public static ShortenResponse from(OriginalToShortenedUseCase.Response response) {
+        return new ShortenResponse(response.shortened());
     }
 
 }
