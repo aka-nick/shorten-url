@@ -1,8 +1,9 @@
 package me.nego.shortenurl.business.scenario;
 
 import java.util.Optional;
-import me.nego.shortenurl.business.usecase.OriginalToShortenedUseCase;
-import me.nego.shortenurl.business.usecase.OriginalToShortenedUseCase.Response;
+import me.nego.shortenurl.business.domain.Address;
+import me.nego.shortenurl.infrastructure.entity.AddressJpaEntity;
+import me.nego.shortenurl.infrastructure.service.AddressQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,20 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class ShortenScenario {
 
-    private final ShortenQuery shortenQuery;
+    private final AddressQuery addressQuery;
 
-    public ShortenScenario(ShortenQuery shortenQuery) {
-        this.shortenQuery = shortenQuery;
+    public ShortenScenario(AddressQuery addressQuery) {
+        this.addressQuery = addressQuery;
     }
 
-    public Optional<OriginalToShortenedUseCase.Response> retrieveByOriginal(String original) {
-        Optional<UrlJpaEntity> exists = shortenQuery.queryByOriginal(original);
+    public Optional<Address> retrieveAddressByOriginal(String original) {
+        Optional<AddressJpaEntity> exists = addressQuery.queryByOriginal(original);
         if (exists.isEmpty()) {
             return Optional.empty();
         }
 
-        UrlJpaEntity found = exists.get();
-        return Optional.of(new Response(
+        AddressJpaEntity found = exists.get();
+        return Optional.of(new Address(
                 found.getOriginal(),
                 found.getShortened()
         ));
