@@ -28,7 +28,7 @@ public class ShortenController {
     public Object shorten(
             @RequestBody @Validated final ShortenRequest requestDto
     ) {
-        return new ShortenResponse(originalToShortenedUseCase.originalToShortened(
+        return ShortenResponse.from(originalToShortenedUseCase.originalToShortened(
                 new Request(requestDto.original())
         ));
     }
