@@ -12,4 +12,6 @@ public interface AddressRepository extends JpaRepository<AddressJpaEntity, Long>
 
     Optional<AddressJpaEntity> findByOriginal(String original);
 
+    AddressJpaEntity findByShortened(String shortened);
+
 }
