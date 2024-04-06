@@ -24,4 +24,8 @@ public class AddressQuery {
         return addressRepository.findByOriginal(original);
     }
 
+    public AddressJpaEntity queryByShortened(String shortened) {
+        return addressRepository.findByShortened(shortened);
+    }
+
 }
