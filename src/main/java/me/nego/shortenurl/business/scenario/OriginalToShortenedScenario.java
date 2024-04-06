@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class OriginalToShortenedScenario {
 
+    // TODO: Shortened(단축주소와 원주소를 가지고 있는)를 추출하고나면 여기에서 상수 기억할 책임이 없을 것이다
     private static final int SHORTEN_LENGTH = 5;
     private static final long EXPIRE_TERM = 7L;
 
