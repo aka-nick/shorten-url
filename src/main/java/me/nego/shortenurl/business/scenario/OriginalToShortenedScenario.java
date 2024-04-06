@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(readOnly = true)
-public class ShortenScenario {
+public class OriginalToShortenedScenario {
 
     private static final int SHORTEN_LENGTH = 5;
     private static final long EXPIRE_TERM = 7L;
@@ -24,7 +24,7 @@ public class ShortenScenario {
     private final AddressQuery addressQuery;
     private final AddressCommand addressCommand;
 
-    public ShortenScenario(
+    public OriginalToShortenedScenario(
             AddressQuery addressQuery,
             AddressCommand addressCommand
     ) {
