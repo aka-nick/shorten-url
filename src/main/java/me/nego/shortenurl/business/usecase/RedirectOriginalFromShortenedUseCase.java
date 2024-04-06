@@ -9,10 +9,19 @@ public interface RedirectOriginalFromShortenedUseCase {
 
     Response redirectOriginalFromShortened(Request request);
 
-    record Request() {
+    record Request(
+            String shortened
+    ) {
     }
 
-    record Response() {
+    record Response(
+            String original
+    ) {
+
+        public static Response from(String original) {
+            return new Response(original);
+        }
+
     }
 
 }
