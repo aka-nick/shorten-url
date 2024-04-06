@@ -1,11 +1,10 @@
 package me.nego.shortenurl.interfaces.api;
 
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import me.nego.shortenurl.business.usecase.RedirectOriginalFromShortenedUseCase;
 import me.nego.shortenurl.business.usecase.RedirectOriginalFromShortenedUseCase.Request;
 import me.nego.shortenurl.business.usecase.RedirectOriginalFromShortenedUseCase.Response;
 import me.nego.shortenurl.interfaces.dto.RedirectRequest;
+import me.nego.shortenurl.interfaces.dto.RedirectResponse;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,15 +24,14 @@ public class RedirectController {
     }
 
     @GetMapping("/{shortened}")
-    public void redirect(
-            @PathVariable("shortened") @Validated RedirectRequest requestDto,
-            HttpServletResponse httpServletResponse
-    ) throws IOException {
+    public RedirectResponse redirect(
+            @PathVariable("shortened") @Validated RedirectRequest requestDto
+    ) {
         Response response = redirectOriginalFromShortenedUseCase.redirectOriginalFromShortened(
                 new Request(requestDto.shortened())
         );
 
-        httpServletResponse.sendRedirect(response.original());
+        return RedirectResponse.from(response);
     }
 
 
