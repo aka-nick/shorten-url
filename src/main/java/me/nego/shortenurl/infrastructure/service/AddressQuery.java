@@ -1,5 +1,7 @@
 package me.nego.shortenurl.infrastructure.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import me.nego.shortenurl.infrastructure.entity.AddressJpaEntity;
 import me.nego.shortenurl.infrastructure.repository.AddressRepository;
@@ -26,6 +28,10 @@ public class AddressQuery {
 
     public AddressJpaEntity queryByShortened(String shortened) {
         return addressRepository.findByShortened(shortened);
+    }
+
+    public List<AddressJpaEntity> queryAllByCreatedAtLessThanEqual(LocalDateTime term) {
+        return addressRepository.findAllByCreatedAtLessThanEqual(term);
     }
 
 }

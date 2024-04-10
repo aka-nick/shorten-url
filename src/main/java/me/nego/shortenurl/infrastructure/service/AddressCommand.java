@@ -1,5 +1,6 @@
 package me.nego.shortenurl.infrastructure.service;
 
+import java.util.List;
 import me.nego.shortenurl.infrastructure.entity.AddressJpaEntity;
 import me.nego.shortenurl.infrastructure.repository.AddressRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class AddressCommand {
 
     public AddressJpaEntity save(AddressJpaEntity toSave) {
         return addressRepository.save(toSave);
+    }
+
+    public void deleteAllByTargetIds(List<Long> targetIds) {
+        addressRepository.deleteAllById(targetIds);
     }
 
 }
