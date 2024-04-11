@@ -1,5 +1,6 @@
 package me.nego.shortenurl.interfaces.exception.aop;
 
+import me.nego.shortenurl.business.exception.AddressNotFoundException;
 import me.nego.shortenurl.interfaces.exception.ExceptionResponse;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,13 @@ public class ApiRestControllerAdvice {
     /*
     커스텀 예외 처리
      */
+    @ExceptionHandler(AddressNotFoundException.class)
+    ExceptionResponse handException(AddressNotFoundException e) {
+        return new ExceptionResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.name(),
+                e.getMessage()
+        );
+    }
 
 }
