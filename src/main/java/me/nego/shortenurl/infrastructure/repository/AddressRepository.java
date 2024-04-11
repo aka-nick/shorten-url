@@ -14,7 +14,7 @@ public interface AddressRepository extends JpaRepository<AddressJpaEntity, Long>
 
     Optional<AddressJpaEntity> findByOriginal(String original);
 
-    AddressJpaEntity findByShortened(String shortened);
+    Optional<AddressJpaEntity> findByShortened(String shortened);
 
     List<AddressJpaEntity> findAllByCreatedAtLessThanEqual(LocalDateTime term);
 
