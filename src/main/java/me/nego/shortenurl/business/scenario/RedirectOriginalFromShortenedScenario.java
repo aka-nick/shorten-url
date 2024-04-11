@@ -1,6 +1,7 @@
 package me.nego.shortenurl.business.scenario;
 
 import java.util.Optional;
+import me.nego.shortenurl.business.exception.AddressNotFoundException;
 import me.nego.shortenurl.infrastructure.service.AddressQuery;
 import me.nego.shortenurl.infrastructure.service.ShortenedOriginalCacheService;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class RedirectOriginalFromShortenedScenario {
     private String getOriginalInDb(String shortened) {
         return addressQuery
                 .queryByShortened(shortened)
+                .orElseThrow(() -> new AddressNotFoundException(shortened))
                 .getOriginal();
     }
 
